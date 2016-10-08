@@ -13,7 +13,6 @@ namespace Yxc.Entities.v1
 
         public class EventDataMain
         {
-
             public string power { get;  set; }
             public string input { get;  set; }
             public int? volume { get;  set; }
