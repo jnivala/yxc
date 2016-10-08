@@ -52,13 +52,13 @@ namespace Yxc.Console
         private static void ExecuteIt()
         {
             var myClient= new UdpClient(41100);
-            IPEndPoint myRemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+            IPEndPoint myRemoteIpEndPoint = new IPEndPoint(IPAddress.Parse("192.168.0.3"), 0);
             while (IsRunning)
             {
                 Byte[] receiveBytes = myClient.Receive(ref myRemoteIpEndPoint);
                 string myString = Encoding.UTF8.GetString(receiveBytes);
                 var z = JsonConvert.DeserializeObject<EventData>(myString);
-                System.Console.WriteLine(myString);                
+                System.Console.WriteLine($"{DateTime.Now} {myString}");
             }
         }
     }
