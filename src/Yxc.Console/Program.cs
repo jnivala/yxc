@@ -22,7 +22,7 @@ namespace Yxc.Console
 
 
             string myBaseAddress = "http://192.168.0.3/YamahaExtendedControl/v1";
-            GetDeviceInfo myDeviceInfo = null;            
+            GetDeviceInfo myDeviceInfo;            
 
             Thread myThread = new Thread(ExecuteIt);
             myThread.IsBackground = true;
@@ -57,6 +57,7 @@ namespace Yxc.Console
             {
                 Byte[] receiveBytes = myClient.Receive(ref myRemoteIpEndPoint);
                 string myString = Encoding.UTF8.GetString(receiveBytes);
+                var z = JsonConvert.DeserializeObject<EventData>(myString);
                 System.Console.WriteLine(myString);                
             }
         }
