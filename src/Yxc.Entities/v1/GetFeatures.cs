@@ -11,6 +11,14 @@ namespace Yxc.Entities.v1
         public Tuner tuner { get; set; }
         public Netusb netusb { get; set; }
 
+        public class System
+        {
+            public List<string> func_list { get; set; }
+            public int zone_num { get; set; }
+            public List<InputList> input_list { get; set; }
+            public List<string> ymap_list { get; set; }
+        }
+
         public class InputList
         {
             public string id { get; set; }
@@ -18,14 +26,6 @@ namespace Yxc.Entities.v1
             public bool rename_enable { get; set; }
             public bool account_enable { get; set; }
             public string play_info_type { get; set; }
-        }
-
-        public class System
-        {
-            public List<string> func_list { get; set; }
-            public int zone_num { get; set; }
-            public List<InputList> input_list { get; set; }
-            public List<string> ymap_list { get; set; }
         }
 
         public class RangeStep
