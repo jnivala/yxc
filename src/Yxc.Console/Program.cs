@@ -22,10 +22,9 @@ namespace Yxc.Console
 
 
             string myBaseAddress = "http://192.168.0.3/YamahaExtendedControl/v1";
-            GetDeviceInfo myDeviceInfo;            
+            GetDeviceInfo myDeviceInfo;
 
-            Thread myThread = new Thread(ExecuteIt);
-            myThread.IsBackground = true;
+            Thread myThread = new Thread(ReceiveUdpEvent) {IsBackground = true};
             myThread.Start();
 
             using (WebClient myWebClient = new WebClient())
@@ -43,7 +42,7 @@ namespace Yxc.Console
                     }
                 }
 
-                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getFeatures "))
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getFeatures"))
                 {
                     if (myStream != null)
                     {
@@ -54,7 +53,7 @@ namespace Yxc.Console
                     }
                 }
 
-                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getFuncStatus "))
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getFuncStatus"))
                 {
                     if (myStream != null)
                     {
@@ -64,6 +63,16 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetFuncStatus>(myString);
                     }
                 }
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getLocationInfo"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<GetLocationInfo>(myString);
+                    }
+                }
             }
 
             System.Console.WriteLine("Press any key to quit");
@@ -71,7 +80,7 @@ namespace Yxc.Console
             IsRunning = false;
         }
 
-        private static void ExecuteIt()
+        private static void ReceiveUdpEvent()
         {
             var myClient= new UdpClient(41100);
             IPEndPoint myRemoteIpEndPoint = new IPEndPoint(IPAddress.Parse("192.168.0.3"), 0);

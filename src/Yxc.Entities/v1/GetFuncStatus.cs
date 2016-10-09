@@ -8,6 +8,6 @@
         public bool speaker_a { get; set; }
         public bool speaker_b { get; set; }
         public bool headphone { get; set; }
-        // ReSharper restore All
     }
+    // ReSharper restore All
 }

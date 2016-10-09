@@ -90,7 +90,6 @@
         {
             public bool dist_info_updated { get; set; }
         }
-
-        // ReSharper restore All
     }
+    // ReSharper restore All
 }
