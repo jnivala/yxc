@@ -39,6 +39,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="v1\Netusb\GetAccountStatus.cs" />
     <Compile Include="v1\Netusb\GetListInfo.cs" />
     <Compile Include="v1\Netusb\GetPlayInfo.cs" />
     <Compile Include="v1\Netusb\GetPresetInfo.cs" />

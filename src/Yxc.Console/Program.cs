@@ -176,6 +176,22 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetListInfo>(myString);
                     }
                 }
+                // 7.7 setListControl 
+                // 7.8 setSearchString 
+                // 7.9 recallPreset 
+                // 7.10 storePreset 
+                // 7.11
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/netusb/getAccountStatus"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetAccountStatus>(myString);
+                    }
+                }
+
             }
 
             System.Console.WriteLine("Press any key to quit");
