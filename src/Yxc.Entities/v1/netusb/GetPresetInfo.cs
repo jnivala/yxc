@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Yxc.Entities.v1.Tuner
+namespace Yxc.Entities.v1.Netusb
 {
-    // ReSharper disable All
+    // Resharper disable All
     public class GetPresetInfo
     {
         public int response_code { get; set; }
@@ -11,10 +11,9 @@ namespace Yxc.Entities.v1.Tuner
 
         public class PresetInfo
         {
-            public string band { get; set; }
-            public int number { get; set; }
-            public int hd_program { get; set; }
+            public string input { get; set; }
+            public string text { get; set; }
         }
     }
-    // ReSharper restore All
+    // Resharper restore All
 }

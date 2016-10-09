@@ -1,4 +1,4 @@
-﻿namespace Yxc.Entities.v1.system
+﻿namespace Yxc.Entities.v1.System
 {
     // ReSharper disable All 
     public class GetFuncStatus

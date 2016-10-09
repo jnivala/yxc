@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Yxc.Entities.v1.zone
+namespace Yxc.Entities.v1.Zone
 {
     // ReSharper disable All
     public class GetSoundProgramList

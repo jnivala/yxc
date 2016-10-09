@@ -1,4 +1,4 @@
-﻿namespace Yxc.Entities.v1.tuner
+﻿namespace Yxc.Entities.v1.Tuner
 {
     // ReSharper disable All
     public class GetPlayInfo
