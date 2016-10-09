@@ -3,7 +3,7 @@
 namespace Yxc.Entities.v1.System
 {
     // ReSharper disable All 
-    public class GetFeatures
+    public class GetFeaturesResponse
     {
         public int response_code { get; set; }
         public System system { get; set; }

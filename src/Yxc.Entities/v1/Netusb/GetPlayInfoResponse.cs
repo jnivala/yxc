@@ -1,7 +1,7 @@
 ﻿namespace Yxc.Entities.v1.Netusb
 {
     // ReSharper disable All
-    public class GetPlayInfo
+    public class GetPlayInfoResponse
     {
         public int response_code { get; set; }
         public string input { get; set; }

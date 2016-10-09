@@ -1,7 +1,7 @@
 ﻿namespace Yxc.Entities.v1.Tuner
 {
     // ReSharper disable All
-    public class GetPlayInfo
+    public class GetPlayInfoResponse
     {
         public int response_code { get; set; }
         public string band { get; set; }

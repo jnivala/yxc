@@ -1,7 +1,7 @@
 ﻿namespace Yxc.Entities.v1.Zone
 {
     // ReSharper disable All 
-    public class GetStatus
+    public class GetStatusResponse
     {
         public int response_code { get; set; }
         public string power { get; set; }

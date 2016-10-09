@@ -1,7 +1,7 @@
 ﻿namespace Yxc.Entities.v1.System
 {
     // ReSharper disable All 
-    public class GetFuncStatus
+    public class GetFuncStatusResponse
     {
         public int response_code { get; set; }
         public bool auto_power_standby { get; set; }

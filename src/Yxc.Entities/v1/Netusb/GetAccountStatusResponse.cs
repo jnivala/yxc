@@ -3,7 +3,7 @@
 namespace Yxc.Entities.v1.Netusb
 {
     // ReSharper disable All
-    public class GetAccountStatus
+    public class GetAccountStatusResponse
     {
         public int response_code { get; set; }
         public List<ServiceList> service_list { get; set; }

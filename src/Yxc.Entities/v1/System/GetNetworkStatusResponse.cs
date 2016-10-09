@@ -1,7 +1,7 @@
 ﻿namespace Yxc.Entities.v1.System
 {
     // ReSharper disable All 
-    public class GetNetworkStatus
+    public class GetNetworkStatusResponse
     {
         public int response_code { get; set; }
         public string network_name { get; set; }

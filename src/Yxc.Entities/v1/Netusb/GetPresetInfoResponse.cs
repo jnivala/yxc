@@ -3,7 +3,7 @@
 namespace Yxc.Entities.v1.Netusb
 {
     // ReSharper disable All
-    public class GetPresetInfo
+    public class GetPresetInfoResponse
     {
         public int response_code { get; set; }
         public List<PresetInfo> preset_info { get; set; }

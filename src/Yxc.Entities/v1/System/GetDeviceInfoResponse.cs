@@ -1,7 +1,7 @@
 ﻿namespace Yxc.Entities.v1.System
 {
     // ReSharper disable All 
-    public class GetDeviceInfo
+    public class GetDeviceInfoResponse
     {
         public int response_code { get; set; }
         public string model_name { get; set; }

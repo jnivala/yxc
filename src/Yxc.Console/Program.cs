@@ -33,7 +33,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetDeviceInfo>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetDeviceInfoResponse>(myString);
                     }
                 }
                 // 4.2
@@ -44,7 +44,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetFeatures>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetFeaturesResponse>(myString);
                     }
                 }
                 // 4.3
@@ -55,7 +55,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetNetworkStatus>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetNetworkStatusResponse>(myString);
                     }
                 }
                 // 4.4
@@ -66,7 +66,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetFuncStatus>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetFuncStatusResponse>(myString);
                     }
                 }
                 // 4.5 setAutoPowerStandby 
@@ -78,7 +78,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetLocationInfo>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetLocationInfoResponse>(myString);
                     }
                 }
                 // 4.6 sendIrCode
@@ -91,7 +91,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Zone.GetStatus>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Zone.GetStatusResponse>(myString);
                     }
                 }
                 // 5.2
@@ -102,7 +102,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Zone.GetSoundProgramList>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Zone.GetSoundProgramListResponse>(myString);
                     }
                 }
                 // 5.3 setPower
@@ -121,7 +121,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Tuner.GetPresetInfo>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Tuner.GetPresetInfoResponse>(myString);
                     }
                 }
                 // 6.2
@@ -132,7 +132,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Tuner.GetPlayInfo>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Tuner.GetPlayInfoResponse>(myString);
                     }
                 }
                 // 6.3 setFreq
@@ -148,7 +148,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPresetInfo>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPresetInfoResponse>(myString);
                     }
                 }
                 // 7.2
@@ -159,7 +159,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPlayInfo>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPlayInfoResponse>(myString);
                     }
                 }
                 // 7.3 setPlayback 
@@ -173,7 +173,7 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetListInfo>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetListInfoResponse>(myString);
                     }
                 }
                 // 7.7 setListControl 
@@ -188,10 +188,26 @@ namespace Yxc.Console
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetAccountStatus>(myString);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetAccountStatusResponse>(myString);
                     }
                 }
-
+                // 7.12 switchAccount 
+                // 7.13 getServiceInfo 
+                // 8.1
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/cd/getPlayInfo"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Cd.GetPlayInfoResponse>(myString);
+                    }
+                }
+                // 8.2 setPlayback 
+                // 8.3 toggleTray 
+                // 8.4 toggleRepeat 
+                // 8.5 toggleShuffle 
             }
 
             System.Console.WriteLine("Press any key to quit");

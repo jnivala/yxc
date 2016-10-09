@@ -3,7 +3,7 @@
 namespace Yxc.Entities.v1.Zone
 {
     // ReSharper disable All
-    public class GetSoundProgramList
+    public class GetSoundProgramListResponse
     {
         public int response_code { get; set; }
         /// <summary>

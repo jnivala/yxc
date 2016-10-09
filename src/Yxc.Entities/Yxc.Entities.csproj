@@ -39,21 +39,22 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="v1\Netusb\GetAccountStatus.cs" />
-    <Compile Include="v1\Netusb\GetListInfo.cs" />
-    <Compile Include="v1\Netusb\GetPlayInfo.cs" />
-    <Compile Include="v1\Netusb\GetPresetInfo.cs" />
-    <Compile Include="v1\System\GetNetworkStatus.cs" />
-    <Compile Include="v1\Tuner\GetPlayInfo.cs" />
-    <Compile Include="v1\Tuner\GetPresetInfo.cs" />
-    <Compile Include="v1\Zone\GetSoundProgramList.cs" />
-    <Compile Include="v1\Zone\GetStatus.cs" />
+    <Compile Include="v1\Cd\GetPlayInfoResponse.cs" />
+    <Compile Include="v1\Netusb\GetAccountStatusResponse.cs" />
+    <Compile Include="v1\Netusb\GetListInfoResponse.cs" />
+    <Compile Include="v1\Netusb\GetPlayInfoResponse.cs" />
+    <Compile Include="v1\Netusb\GetPresetInfoResponse.cs" />
+    <Compile Include="v1\System\GetNetworkStatusResponse.cs" />
+    <Compile Include="v1\Tuner\GetPlayInfoResponse.cs" />
+    <Compile Include="v1\Tuner\GetPresetInfoResponse.cs" />
+    <Compile Include="v1\Zone\GetSoundProgramListResponse.cs" />
+    <Compile Include="v1\Zone\GetStatusResponse.cs" />
     <Compile Include="v1\EventData.cs" />
-    <Compile Include="v1\System\GetDeviceInfo.cs" />
+    <Compile Include="v1\System\GetDeviceInfoResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="v1\System\GetFeatures.cs" />
-    <Compile Include="v1\System\GetFuncStatus.cs" />
-    <Compile Include="v1\System\GetLocationInfo.cs" />
+    <Compile Include="v1\System\GetFeaturesResponse.cs" />
+    <Compile Include="v1\System\GetFuncStatusResponse.cs" />
+    <Compile Include="v1\System\GetLocationInfoResponse.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
