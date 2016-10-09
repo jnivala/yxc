@@ -73,6 +73,18 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetLocationInfo>(myString);
                     }
                 }
+
+                string myZone = "main";
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/{myZone}/getStatus"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<GetStatus>(myString);
+                    }
+                }
             }
 
             System.Console.WriteLine("Press any key to quit");
