@@ -85,6 +85,17 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetStatus>(myString);
                     }
                 }
+
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getNetworkStatus"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<GetNetworkStatus>(myString);
+                    }
+                }
             }
 
             System.Console.WriteLine("Press any key to quit");
