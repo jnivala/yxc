@@ -39,16 +39,17 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="v1\GetNetworkStatus.cs" />
-    <Compile Include="v1\GetPresetInfo.cs" />
-    <Compile Include="v1\GetSoundProgramList.cs" />
-    <Compile Include="v1\GetStatus.cs" />
+    <Compile Include="v1\system\GetNetworkStatus.cs" />
+    <Compile Include="v1\tuner\GetPlayInfo.cs" />
+    <Compile Include="v1\tuner\GetPresetInfo.cs" />
+    <Compile Include="v1\zone\GetSoundProgramList.cs" />
+    <Compile Include="v1\zone\GetStatus.cs" />
     <Compile Include="v1\EventData.cs" />
-    <Compile Include="v1\GetDeviceInfo.cs" />
+    <Compile Include="v1\system\GetDeviceInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="v1\GetFeatures.cs" />
-    <Compile Include="v1\GetFuncStatus.cs" />
-    <Compile Include="v1\GetLocationInfo.cs" />
+    <Compile Include="v1\system\GetFeatures.cs" />
+    <Compile Include="v1\system\GetFuncStatus.cs" />
+    <Compile Include="v1\system\GetLocationInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Yxc.Entities.v1
+namespace Yxc.Entities.v1.tuner
 {
     // ReSharper disable All
     public class GetPresetInfo

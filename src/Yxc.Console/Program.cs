@@ -10,6 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Yxc.Entities.v1;
+using Yxc.Entities.v1.system;
+using Yxc.Entities.v1.tuner;
+using Yxc.Entities.v1.zone;
 
 namespace Yxc.Console
 {
@@ -130,6 +133,25 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetPresetInfo>(myString);
                     }
                 }
+                // 6.2
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/tuner/getPlayInfo"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<GetPlayInfo>(myString);
+                    }
+                }
+                // 6.3 setFreq
+                // 6.4 recallPreset
+                // 6.5 switchPreset
+                // 6.6 storePreset
+                // 6.7 setDabService 
+
+
+
             }
 
             System.Console.WriteLine("Press any key to quit");

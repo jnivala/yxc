@@ -1,4 +1,4 @@
-﻿namespace Yxc.Entities.v1
+﻿namespace Yxc.Entities.v1.system
 {
     // ReSharper disable All 
     public class GetNetworkStatus

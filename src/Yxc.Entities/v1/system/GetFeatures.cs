@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Yxc.Entities.v1
+namespace Yxc.Entities.v1.system
 {
     // ReSharper disable All 
     public class GetFeatures
