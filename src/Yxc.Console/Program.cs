@@ -31,6 +31,7 @@ namespace Yxc.Console
             {
                 myWebClient.Headers.Add("X-AppName", "MusicCast/1.50(iOS)");
                 myWebClient.Headers.Add("X-AppPort", "41100");
+                // 4.1
                 using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getDeviceInfo"))
                 {
                     if (myStream != null)
@@ -41,7 +42,7 @@ namespace Yxc.Console
                         myDeviceInfo = JsonConvert.DeserializeObject<GetDeviceInfo>(myString);
                     }
                 }
-
+                // 4.2
                 using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getFeatures"))
                 {
                     if (myStream != null)
@@ -52,7 +53,18 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetFeatures>(myString);
                     }
                 }
-
+                // 4.3
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getNetworkStatus"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<GetNetworkStatus>(myString);
+                    }
+                }
+                // 4.4
                 using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getFuncStatus"))
                 {
                     if (myStream != null)
@@ -63,6 +75,8 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetFuncStatus>(myString);
                     }
                 }
+                // 4.5 setAutoPowerStandby 
+                // 4.6 
                 using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getLocationInfo"))
                 {
                     if (myStream != null)
@@ -73,7 +87,8 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetLocationInfo>(myString);
                     }
                 }
-
+                // 4.6 sendIrCode
+                // 5.1
                 string myZone = "main";
                 using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/{myZone}/getStatus"))
                 {
@@ -85,15 +100,14 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetStatus>(myString);
                     }
                 }
-
-                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getNetworkStatus"))
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/{myZone}/getSoundProgramList"))
                 {
                     if (myStream != null)
                     {
                         var myBuffer = new byte[4096];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
-                        var x = JsonConvert.DeserializeObject<GetNetworkStatus>(myString);
+                        var x = JsonConvert.DeserializeObject<GetSoundProgramList>(myString);
                     }
                 }
             }
