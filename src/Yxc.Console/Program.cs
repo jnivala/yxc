@@ -26,7 +26,7 @@ namespace Yxc.Console
 
             Thread myThread = new Thread(ExecuteIt);
             myThread.IsBackground = true;
-            myThread.Start();                        
+            myThread.Start();
 
             using (WebClient myWebClient = new WebClient())
             {
@@ -40,6 +40,28 @@ namespace Yxc.Console
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         myDeviceInfo = JsonConvert.DeserializeObject<GetDeviceInfo>(myString);
+                    }
+                }
+
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getFeatures "))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<GetFeatures>(myString);
+                    }
+                }
+
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + "/system/getFuncStatus "))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<GetFuncStatus>(myString);
                     }
                 }
             }

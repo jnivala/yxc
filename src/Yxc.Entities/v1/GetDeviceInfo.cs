@@ -1,8 +1,8 @@
 ﻿namespace Yxc.Entities.v1
 {
+    // ReSharper disable All 
     public class GetDeviceInfo
     {
-        // ReSharper disable All 
         public int response_code { get; set; }
         public string model_name { get; set; }
         public string destination { get; set; }
@@ -13,8 +13,7 @@
         public string netmodule_checksum { get; set; }
         public string operation_mode { get; set; }
         public string update_error_code { get; set; }
-        // Did not appear: update_progress object Reserved
-
-        // ReSharper restore All
+        // update_progress object Reserved 
     }
+    // ReSharper restore All
 }
