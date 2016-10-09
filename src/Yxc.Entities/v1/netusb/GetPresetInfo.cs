@@ -2,7 +2,7 @@
 
 namespace Yxc.Entities.v1.Netusb
 {
-    // Resharper disable All
+    // ReSharper disable All
     public class GetPresetInfo
     {
         public int response_code { get; set; }
@@ -15,5 +15,5 @@ namespace Yxc.Entities.v1.Netusb
             public string text { get; set; }
         }
     }
-    // Resharper restore All
+    // ReSharper restore All
 }

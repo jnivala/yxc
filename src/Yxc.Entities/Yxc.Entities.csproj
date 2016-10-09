@@ -39,6 +39,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="v1\netusb\GetPlayInfo.cs" />
     <Compile Include="v1\netusb\GetPresetInfo.cs" />
     <Compile Include="v1\system\GetNetworkStatus.cs" />
     <Compile Include="v1\tuner\GetPlayInfo.cs" />

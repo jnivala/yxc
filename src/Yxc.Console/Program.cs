@@ -151,6 +151,17 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPresetInfo>(myString);
                     }
                 }
+                // 7.2
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/netusb/getPlayInfo "))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPlayInfo>(myString);
+                    }
+                }
 
             }
 
