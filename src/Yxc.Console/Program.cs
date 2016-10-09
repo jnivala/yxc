@@ -100,6 +100,7 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<GetStatus>(myString);
                     }
                 }
+                // 5.2
                 using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/{myZone}/getSoundProgramList"))
                 {
                     if (myStream != null)
@@ -108,6 +109,25 @@ namespace Yxc.Console
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<GetSoundProgramList>(myString);
+                    }
+                }
+                // 5.3 setPower
+                // 5.4 setSleep
+                // 5.5 setVolume
+                // 5.6 setMute
+                // 5.7 setInput
+                // 5.8 setSoundProgram
+                // 5.9 prepareInputChange
+                // 6.1
+                string myBand = "common";
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/tuner/getPresetInfo?band={myBand}"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<GetPresetInfo>(myString);
                     }
                 }
             }
