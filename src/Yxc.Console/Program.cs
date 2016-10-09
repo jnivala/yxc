@@ -162,6 +162,10 @@ namespace Yxc.Console
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPlayInfo>(myString);
                     }
                 }
+                // 7.3 setPlayback 
+                // 7.4 toggleRepeat 
+                // 7.5 toggleShuffle 
+                // 7.6 getListInfo - how to implement. Add an usb stick with content perhaps?
 
             }
 
