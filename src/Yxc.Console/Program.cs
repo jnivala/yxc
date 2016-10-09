@@ -165,8 +165,17 @@ namespace Yxc.Console
                 // 7.3 setPlayback 
                 // 7.4 toggleRepeat 
                 // 7.5 toggleShuffle 
-                // 7.6 getListInfo - how to implement. Add an usb stick with content perhaps?
-
+                // 7.6 Inserted an USB stick with MP3 albums in folders.
+                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/netusb/getListInfo?input=usb&index=0&size=8&lang=en"))
+                {
+                    if (myStream != null)
+                    {
+                        var myBuffer = new byte[4096];
+                        int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
+                        string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
+                        var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetListInfo>(myString);
+                    }
+                }
             }
 
             System.Console.WriteLine("Press any key to quit");
