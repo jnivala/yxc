@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yxc.Entities", "Yxc.Entitie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yxc.Console", "Yxc.Console\Yxc.Console.csproj", "{2CED8710-5B7D-4B86-9DB0-72B5C6768142}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yxc.Device", "Yxc.Device\Yxc.Device.csproj", "{0A7D35ED-60D6-4AFD-BE78-CFEFCF04C452}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2CED8710-5B7D-4B86-9DB0-72B5C6768142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CED8710-5B7D-4B86-9DB0-72B5C6768142}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CED8710-5B7D-4B86-9DB0-72B5C6768142}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A7D35ED-60D6-4AFD-BE78-CFEFCF04C452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A7D35ED-60D6-4AFD-BE78-CFEFCF04C452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A7D35ED-60D6-4AFD-BE78-CFEFCF04C452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A7D35ED-60D6-4AFD-BE78-CFEFCF04C452}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

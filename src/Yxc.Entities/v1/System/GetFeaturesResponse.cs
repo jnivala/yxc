@@ -31,7 +31,7 @@ namespace Yxc.Entities.v1.System
             /// Reserved
             /// </summary>
             public string web_control_url { get; set; }
-    }
+        }
 
         public class InputList
         {
@@ -56,7 +56,7 @@ namespace Yxc.Entities.v1.System
             /// <summary>
             /// R-N602 v1.12 does not set.
             /// </summary>
-            public int? zone_b { get; set; }
+            public bool? zone_b { get; set; }
             public List<string> func_list { get; set; }
             public List<string> input_list { get; set; }
             /// <summary>

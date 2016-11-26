@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Rssdp;
 using Yxc.Entities.v1;
 
 namespace Yxc.Console
@@ -11,15 +15,86 @@ namespace Yxc.Console
     class Program
     {
         private static bool IsRunning = true;
+        private static SsdpDeviceLocator _DeviceLocator;
 
         static void Main(string[] args)
         {
-
+            //SearchForDevices().Wait();
 
             string myBaseAddress = "http://192.168.0.3/YamahaExtendedControl/v1";
 
-            Thread myThread = new Thread(ReceiveUdpEvent) {IsBackground = true};
-            myThread.Start();
+            //Thread myThread = new Thread(ReceiveUdpEvent) { IsBackground = true };
+            //myThread.Start();
+
+            _DeviceLocator = new SsdpDeviceLocator();
+
+            // (Optional) Set the filter so we only see notifications for devices we care about 
+            // (can be any search target value i.e device type, uuid value etc - any value that appears in the 
+            // DiscoverdSsdpDevice.NotificationType property or that is used with the searchTarget parameter of the Search method).
+            _DeviceLocator.NotificationFilter = "upnp:rootdevice";
+
+            // Connect our event handler so we process devices as they are found
+            _DeviceLocator.DeviceAvailable += deviceLocator_DeviceAvailable;
+            _DeviceLocator.DeviceUnavailable += _DeviceLocator_DeviceUnavailable;
+
+            // Enable listening for notifications (optional)
+            _DeviceLocator.StartListeningForNotifications();
+
+            // Perform a search so we don't have to wait for devices to broadcast notifications 
+            // again to get any results right away (notifications are broadcast periodically).
+            DiscoveredSsdpDevice[] ret = _DeviceLocator.SearchAsync().Result.ToArray();
+
+            System.Console.WriteLine($"SSDP found {ret.Length} device(s).");
+
+            ExecuteGet(myBaseAddress);
+
+            System.Console.WriteLine("Press any key to quit");
+            System.Console.ReadKey();
+            IsRunning = false;
+        }
+
+        private static void _DeviceLocator_DeviceUnavailable(object sender, DeviceUnavailableEventArgs e)
+        {
+            
+        }
+
+        private async static void deviceLocator_DeviceAvailable(object sender, DeviceAvailableEventArgs e)
+        {
+            //Device data returned only contains basic device details and location of full device description.
+            System.Console.WriteLine("Found " + e.DiscoveredDevice.Usn + " at " + e.DiscoveredDevice.DescriptionLocation.ToString());
+
+            //Can retrieve the full device description easily though.
+            var fullDevice = await e.DiscoveredDevice.GetDeviceInfo();
+            System.Console.WriteLine(fullDevice.FriendlyName);
+            System.Console.WriteLine();
+        }
+
+        //public static async Task SearchForDevices()
+        //{
+        //    // This code goes in a method somewhere.
+        //    using (var deviceLocator = new SsdpDeviceLocator())
+        //    {
+        //        var foundDevices = await deviceLocator.SearchAsync(); // Can pass search arguments here (device type, uuid). No arguments means all devices.
+
+        //        var x = foundDevices.ToArray();
+
+        //        foreach (var foundDevice in x)
+        //        {
+        //            // Device data returned only contains basic device details and location ]
+        //            // of full device description.
+        //            System.Console.WriteLine("Found " + foundDevice.Usn + " at " + foundDevice.DescriptionLocation.ToString());
+
+        //            // Can retrieve the full device description easily though.
+        //            var fullDevice = await foundDevice.GetDeviceInfo();
+        //            System.Console.WriteLine(fullDevice.FriendlyName);
+        //            System.Console.WriteLine();
+        //        }
+        //    }
+        //}
+
+        private static void ExecuteGet(string myBaseAddress)
+        {
+            int nBuffer = 1024*16;
 
             using (WebClient myWebClient = new WebClient())
             {
@@ -30,7 +105,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetDeviceInfoResponse>(myString);
@@ -41,7 +116,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetFeaturesResponse>(myString);
@@ -52,7 +127,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetNetworkStatusResponse>(myString);
@@ -63,7 +138,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetFuncStatusResponse>(myString);
@@ -75,7 +150,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.System.GetLocationInfoResponse>(myString);
@@ -88,7 +163,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Zone.GetStatusResponse>(myString);
@@ -99,7 +174,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Zone.GetSoundProgramListResponse>(myString);
@@ -118,7 +193,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Tuner.GetPresetInfoResponse>(myString);
@@ -129,7 +204,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Tuner.GetPlayInfoResponse>(myString);
@@ -145,7 +220,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPresetInfoResponse>(myString);
@@ -156,7 +231,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetPlayInfoResponse>(myString);
@@ -166,11 +241,13 @@ namespace Yxc.Console
                 // 7.4 toggleRepeat 
                 // 7.5 toggleShuffle 
                 // 7.6 Inserted an USB stick with MP3 albums in folders.
-                using (var myStream = myWebClient.OpenRead(myBaseAddress + $"/netusb/getListInfo?input=usb&index=0&size=8&lang=en"))
+                using (
+                    var myStream = myWebClient.OpenRead(myBaseAddress + $"/netusb/getListInfo?input=usb&index=0&size=8&lang=en")
+                    )
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetListInfoResponse>(myString);
@@ -185,7 +262,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Netusb.GetAccountStatusResponse>(myString);
@@ -198,7 +275,7 @@ namespace Yxc.Console
                 {
                     if (myStream != null)
                     {
-                        var myBuffer = new byte[4096];
+                        var myBuffer = new byte[nBuffer];
                         int nRead = myStream.Read(myBuffer, 0, myBuffer.Length);
                         string myString = Encoding.UTF8.GetString(myBuffer, 0, nRead);
                         var x = JsonConvert.DeserializeObject<Yxc.Entities.v1.Cd.GetPlayInfoResponse>(myString);
@@ -209,10 +286,6 @@ namespace Yxc.Console
                 // 8.4 toggleRepeat 
                 // 8.5 toggleShuffle 
             }
-
-            System.Console.WriteLine("Press any key to quit");
-            System.Console.ReadKey();
-            IsRunning = false;
         }
 
         private static void ReceiveUdpEvent()
@@ -226,6 +299,6 @@ namespace Yxc.Console
                 var z = JsonConvert.DeserializeObject<EventData>(myString);
                 System.Console.WriteLine($"{DateTime.Now} {myString}");
             }
-        }
-    }
+        }        
+    }    
 }
